@@ -24,11 +24,10 @@ main() {
     }
     srand(getpid());
     while (1) {
-        /* Fill up all of a size_type with random bits. Assumes
-           sizeof (int) evenly divides sizeof (size_type). */
+        /* Fill up all of a size_type with random bits. */
         vector<string>::size_type base = 0;
-        for (unsigned i = 0; i < sizeof base / sizeof (int); i++)
-            base |= rand() << (8 * sizeof (int) * i);
+        for (unsigned i = 0; i < sizeof base; i++)
+            base |= (rand() & 0xff) << (8 * i);
         auto nlines = lines.size();
         auto intervals = ~(size_t)0 / nlines;
         if (base < nlines * intervals) {

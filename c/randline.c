@@ -41,13 +41,12 @@ main() {
     /* Generate a random index and print that line. */
     srand(getpid());
     while (1) {
-        /* Fill up all of a size_t with random bits. Assumes
-           sizeof (int) evenly divides sizeof (size_t). */
+        /* Fill up all of a size_t with random bits. */
         size_t base = 0;   /* The underlying random integer. */
-        /* Fill up base with calls to rand(). This should be
-           just 1 or 2 calls. */
-        for (int i = 0; i < sizeof base / sizeof (int); i++)
-            base |= rand() << (8 * sizeof (int) * i);
+        /* Fill up base with calls to rand(). This is not
+           likely to be great, but should be ok. */
+        for (unsigned i = 0; i < sizeof base; i++)
+            base |= (rand() & 0xff) << (8 * i);
         /* Figure out what the slop at the end of the range
            looks like, and reject if base is in there. */
         size_t intervals = ~(size_t)0 / nlines;
