@@ -1,0 +1,34 @@
+/* Print a random line from stdin. */
+
+#include <cstdlib>
+#include <iostream>
+#include <string>
+#include <vector>
+#include <unistd.h>
+
+using namespace std;
+
+int
+main() {
+    auto lines = vector<string>();
+    string line;
+    while (getline(cin, line)) {
+        lines.push_back(line);
+    }
+    srand(getpid());
+    while (1) {
+        /* Fill up all of a size_type with random bits. Assumes
+           sizeof (int) evenly divides sizeof (size_type). */
+        vector<string>::size_type base = 0;
+        for (unsigned i = 0; i < sizeof base / sizeof (int); i++)
+            base |= rand() << (8 * sizeof (int) * i);
+        auto nlines = lines.size();
+        auto intervals = RAND_MAX / nlines;
+        if (base < nlines * intervals) {
+            /* Have selected an index truly uniform-pseudorandomly. */
+            auto index = base % nlines;
+            cout << lines[index] << endl;
+            return 0;
+        }
+    }
+}
