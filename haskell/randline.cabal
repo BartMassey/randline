@@ -1,0 +1,22 @@
+-- Copyright (c) 2018 Bart Massey
+-- [This program is licensed under the "MIT License"]
+-- Please see the file LICENSE in the source
+-- distribution of this software for license terms.
+
+name:                randline
+version:             0.1.0.0
+synopsis:            Print a random line from stdin
+-- description:         
+homepage:            http://github.com/BartMassey/randline
+license:             MIT
+author:              Bart Massey
+maintainer:          bart@cs.pdx.edu
+copyright:           Copyright © 2018 Bart Massey
+build-type:          Simple
+extra-source-files:  ChangeLog.md
+cabal-version:       >=1.10
+
+executable randline
+  main-is:             Main.hs
+  build-depends:       base >=4.10 && <5, random >=1.1 && <2
+  default-language:    Haskell2010

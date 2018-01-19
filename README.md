@@ -38,10 +38,10 @@ this correctly in C.
 The C code contains extensive comments to try to explain
 what is going on.
 
-Implementations in C++, Rust and Python are provided for
-comparison and contrast. These implementations may fail with
-errors if the input is not valid UTF-8, which may or may not
-be a feature.
+Implementations in C++, Rust, Haskell and Python are
+provided for comparison and contrast. These implementations
+may fail with errors if the input is not valid UTF-8, which
+may or may not be a feature.
 
 This program is licensed under the "MIT License".  Please
 see the file LICENSE in the source distribution of this
