@@ -10,4 +10,7 @@ from sys import stdin
 from random import randrange
 
 lines = list(stdin)
-print(lines[randrange(len(lines))], end="")
+line = lines[randrange(len(lines))]
+if line[-1] != '\n':
+    line = line + "\n"
+print(line, end="")
