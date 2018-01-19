@@ -7,8 +7,8 @@
 
 /* Print a random line from stdin. */
 
-#include <cstdlib>
 #include <iostream>
+#include <random>
 #include <string>
 #include <vector>
 #include <unistd.h>
@@ -22,19 +22,10 @@ main() {
     while (getline(cin, line)) {
         lines.push_back(line);
     }
-    srand(getpid());
-    while (1) {
-        /* Fill up all of a size_type with random bits. */
-        vector<string>::size_type base = 0;
-        for (unsigned i = 0; i < sizeof base; i++)
-            base |= (rand() & 0xff) << (8 * i);
-        auto nlines = lines.size();
-        auto intervals = ~(size_t)0 / nlines;
-        if (base < nlines * intervals) {
-            /* Have selected an index truly uniform-pseudorandomly. */
-            auto index = base % nlines;
-            cout << lines[index] << endl;
-            return 0;
-        }
-    }
+    auto rng = mt19937_64(getpid());
+    auto nlines = lines.size();
+    auto distribution =
+        uniform_int_distribution<vector<string>::size_type>(0, nlines - 1);
+    auto index = distribution(rng);
+    cout << lines[index] << endl;
 }
