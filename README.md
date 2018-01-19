@@ -1,4 +1,5 @@
 # randline — print a random line from stdin
+Copyright (c) 2018 Bart Massey
 
 This code is supposed to be a simple but correct C
 implementation of the spec "read stdin, which is assumed to
@@ -41,3 +42,7 @@ Implementations in C++, Rust and Python are provided for
 comparison and contrast. These implementations may fail with
 errors if the input is not valid UTF-8, which may or may not
 be a feature.
+
+This program is licensed under the "MIT License".  Please
+see the file LICENSE in the source distribution of this
+software for license terms.
