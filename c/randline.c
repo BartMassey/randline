@@ -21,12 +21,20 @@ main() {
 
     /* Read all lines into the buffer. */
     while (1) {
+        /* Make sure there's room for the line in the buffer. */
+        assert(nlines < __SIZE_MAX__);
+        /* Read the next line. */
         char *line = readline();
         if (line == 0)
+            /* Was last line.*/
             break;
+        /* Make room for the new line. */
         lines = realloc(lines, (nlines + 1) * sizeof *lines);
+        /* Make sure that worked. */
         assert(lines != 0);
+        /* Append the line to the buffer. */
         lines[nlines] = line;
+        /* Increment the count. */
         nlines++;
     }
 
@@ -35,9 +43,13 @@ main() {
     while (1) {
         /* Fill up all of a size_t with random bits. Assumes
            sizeof (int) evenly divides sizeof (size_t). */
-        size_t base = 0;
+        size_t base = 0;   /* The underlying random integer. */
+        /* Fill up base with calls to rand(). This should be
+           just 1 or 2 calls. */
         for (int i = 0; i < sizeof base / sizeof (int); i++)
             base |= rand() << (8 * sizeof (int) * i);
+        /* Figure out what the slop at the end of the range
+           looks like, and reject if base is in there. */
         size_t intervals = __SIZE_MAX__ / nlines;
         if (base < nlines * intervals) {
             /* Have selected an index truly uniform-pseudorandomly. */
