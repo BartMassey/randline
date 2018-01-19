@@ -30,7 +30,7 @@ main() {
         for (unsigned i = 0; i < sizeof base / sizeof (int); i++)
             base |= rand() << (8 * sizeof (int) * i);
         auto nlines = lines.size();
-        auto intervals = RAND_MAX / nlines;
+        auto intervals = ~(size_t)0 / nlines;
         if (base < nlines * intervals) {
             /* Have selected an index truly uniform-pseudorandomly. */
             auto index = base % nlines;

@@ -50,7 +50,7 @@ main() {
             base |= rand() << (8 * sizeof (int) * i);
         /* Figure out what the slop at the end of the range
            looks like, and reject if base is in there. */
-        size_t intervals = __SIZE_MAX__ / nlines;
+        size_t intervals = ~(size_t)0 / nlines;
         if (base < nlines * intervals) {
             /* Have selected an index truly uniform-pseudorandomly. */
             size_t index = base % nlines;
