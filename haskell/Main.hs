@@ -5,11 +5,13 @@
 
 module Main where
 
+import Data.List (genericLength, genericIndex)
 import System.Random (randomRIO)
 import System.IO (getContents)
 
 main :: IO ()
 main = do
   lines <- fmap lines getContents
-  index <- randomRIO (0, length lines - 1)
-  putStrLn $ lines !! index
+  let nlines = genericLength lines :: Integer
+  index <- randomRIO (0, nlines - 1)
+  putStrLn $ genericIndex lines index
